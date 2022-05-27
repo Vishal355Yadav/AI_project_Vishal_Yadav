@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         int[][]dataFrame=dataPrep(); //dataPrep function returns a two-dimenssional array
         double slope=LR.getSlope(dataFrame); //LR class, which provides slope on invoking getSlope
         new AlertDialog.Builder(this)
-               // .setIcon() //your custom icon
+               // .setIcon() //your custom icon ansd
                 .setTitle("Performance")
 
                 .setMessage(getInterpretation(dataFrame,slope))
@@ -72,12 +72,56 @@ public class MainActivity extends AppCompatActivity {
     public void newMatch() {  //A game is composed of three matches
 
         int operand1 = random.nextInt(10);
-        int operand2=0;
-        //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
-        String operator = operators[random.nextInt(4)];
-        textView2.setText(operand1 + operator + operand2);
+        //int operand2=0;
+        int operand2 = random.nextInt(10);
+        correctButton =  random.nextInt(4);
+//check is operand2 is not zero; otherwise in case of division-divide by zero error will come
+        if(operand2 != 0) {
+            int ans=-100;
+            String operator = operators[random.nextInt(4)];
+            textView2.setText(operand1 + operator + operand2);
+            if(operator.equals("+")){
+                ans=operand1+operand2;
+            }else if(operator.equals("-")){
+                ans=operand1-operand2;
+            }
+            else if(operator.equals("/")){
+                ans=operand1/operand2;
+            }
+            else if(operator.equals("*")){
+                ans=operand1*operand2;
+            }
+            correctButton=random.nextInt(4);
+            if(correctButton == 0 ) {
+                button1.setText(ans+"");
+                button2.setText(ans + 1 + " ");
+                button3.setText(ans -2 + "");
+                button4.setText(ans  +2+ "");
+            }
+            else if(correctButton== 1 ){
+                button1.setText(ans  +1 + " ");
+                button2.setText(ans+ " ");
+                button3.setText(ans  -2 + "");
+                button4.setText(ans  + 2 +"");
+            }
+            else if(correctButton== 2 ){
+                button1.setText(ans  + 1+" " );
+                button2.setText(ans  -3+ "");
+                button3.setText(ans+ " ");
+                button4.setText(ans + 4+"");
+            }
+            else {
+                //button1.setText(ans);
+                button1.setText(ans+3 + " " );
+                button2.setText(ans-1 + " ");
+                button3.setText(ans+4 + "");
+                button4.setText(ans+ " ");
+            }
+        }
 
       // Your code here, to diplay correct and incorrect options on the buttons
+
+
 
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
